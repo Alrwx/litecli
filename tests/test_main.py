@@ -4,6 +4,7 @@ import shutil
 from collections import namedtuple
 from datetime import datetime
 from textwrap import dedent
+from types import SimpleNamespace
 from typing import Any, cast
 from unittest.mock import patch
 
@@ -361,7 +362,10 @@ def test_get_prompt(mock_datetime):
     assert lc.get_prompt(r"\f") == "(none)"
 
     # 12. Windows path
-    lc.connect("C:\\Users\\litecli\\litecli_test.db")
+    #    Stub out SQLExecute so a real file isn't created on non-Windows systems,
+    #    where this path is just a (relative) file name.
+    with patch("litecli.main.SQLExecute", side_effect=lambda database: SimpleNamespace(dbname=database)):
+        lc.connect("C:\\Users\\litecli\\litecli_test.db")
     assert lc.get_prompt(r"\d") == "C:\\Users\\litecli\\litecli_test.db"
 
 

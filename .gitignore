@@ -8,6 +8,7 @@
 /litecli_env
 /.venv
 /.eggs
+.tox/
 
 .vagrant
 *.pyc
