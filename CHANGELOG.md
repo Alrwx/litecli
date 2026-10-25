@@ -6,6 +6,8 @@
 
 ### Internal
 
+- Stop `test_get_prompt` from creating a stray `C:\Users\litecli\litecli_test.db` file in the project folder.
+- Ignore `.tox/` in git and untrack the accidentally committed `.tox/.pkg/file.lock`.
 - Remove the Codex review GitHub Actions workflow.
 - Drop Python 3.9 from test matrices and tooling targets.
 
